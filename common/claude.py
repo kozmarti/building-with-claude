@@ -68,17 +68,24 @@ def structured(
     max_tokens: int = 16000,
     effort: str = "medium",
 ) -> T:
-    """Ask Claude for output that matches a Pydantic model and return it validated."""
+    """Ask Claude for output that matches a Pydantic model and return it validated.
+
+    The model's JSON schema goes in output_config.format (the older
+    output_format parameter is deprecated), so the API guarantees the reply is
+    JSON matching the schema. Pydantic then validates it into the model.
+    """
     kwargs = {"system": system} if system else {}
-    response = client.beta.messages.parse(
+    response = client.beta.messages.create(
         model=MODEL,
         max_tokens=max_tokens,
         messages=[{"role": "user", "content": prompt}],
-        output_format=schema,
-        output_config={"effort": effort},
+        output_config={
+            "effort": effort,
+            "format": {"type": "json_schema", "schema": anthropic.transform_schema(schema)},
+        },
         betas=[FALLBACK_BETA],
         fallbacks="default",
         **kwargs,
     )
     _check(response)
-    return response.parsed_output
+    return schema.model_validate_json(_text_of(response))
