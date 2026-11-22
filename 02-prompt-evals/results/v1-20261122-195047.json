@@ -1,0 +1,37 @@
+{
+  "prompt_version": "v1",
+  "model": "claude-opus-5-5",
+  "average_score": 3.1666666666666665,
+  "results": [
+    {
+      "task": "Write a Python function normalize_phone(s) that strips everything except digits from a phone number string and returns None if fewer than 10 digits remain.",
+      "format": "python",
+      "output": "```python\nimport re\n\ndef normalize_phone(s):\n    \"\"\"\n    Strip every character except ASCII digits 0-9 from a phone number string.\n\n    Returns the string of digits, or None if fewer than 10 digits remain.\n\n    Examples:\n        >>> normalize_phone(\"(555) 123-4567\")\n        '5551234567'\n        >>> normalize_phone(\"+1 555.123.4567\")\n        '15551234567'\n        >>> normalize_phone(\"123-4567\")    # only 7 digits\n        >>> normalize_phone(None)          # no input\n    \"\"\"\n    if s is None:\n        return None\n    digits = re.sub(r\"[^0-9]\", \"\", str(s))\n    return digits if len(digits) >= 10 else None\n```\n\n**Notes on the design:**\n\n- **Only `0-9` are kept.** The pattern `[^0-9]` is used on purpose. `\\d` or `str.isdigit()` would also accept other Unicode digits, such as `'\u0663'` (Arabic-Indic) or `'\u00b2'` (superscript). Those characters would quietly end up in the result.\n- **Non-string input is handled.** `None` returns `None`. Other values, such as an integer `5551234567`, are converted with `str()` first, so the function doesn't crash.\n- **More than 10 digits is allowed.** Country codes like `+1` and international numbers keep all their digits. Only the lower limit of 10 is enforced, as the task specifies.\n\n**Quick tests:**\n\n```python\nassert normalize_phone(\"(555) 123-4567\") == \"5551234567\"\nassert normalize_phone(\"+1 (555) 123-4567\") == \"15551234567\"\nassert normalize_phone(\"555-1234\") is None\nassert normalize_phone(\"\") is None\nassert normalize_phone(None) is None\nassert normalize_phone(\"phone: 555 123 4567 ext\") == \"5551234567\"\nassert normalize_phone(\"\u0665\u0665\u0665\u0661\u0662\u0663\u0664\u0665\u0666\u0667\") is None   # non-ASCII digits are stripped\n```",
+      "code_score": 0,
+      "code_note": "invalid python: invalid syntax (<unknown>, line 21)",
+      "model_score": 7,
+      "model_reasoning": "The function is correct and meets every criterion. However, the required format is python, and the answer adds design notes in markdown plus an extra test section. The grading instructions say to penalize text outside the required format.",
+      "score": 3.5
+    },
+    {
+      "task": "Give a regular expression that matches dates in YYYY-MM-DD format where the month is 01-12 and the day is 01-31.",
+      "format": "regex",
+      "output": "# Regex for YYYY-MM-DD Dates\n\n```regex\n^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$\n```\n\n## How it works\n\n| Part | Meaning |\n|------|---------|\n| `^` | Start of string |\n| `\\d{4}` | Year: any four digits (0000\u20139999) |\n| `-` | Literal hyphen |\n| `(0[1-9]\\|1[0-2])` | Month: `01`\u2013`09` or `10`\u2013`12` |\n| `-` | Literal hyphen |\n| `(0[1-9]\\|[12][0-9]\\|3[01])` | Day: `01`\u2013`09`, `10`\u2013`29`, or `30`\u2013`31` |\n| `$` | End of string |\n\n## Examples\n\n| Input | Result |\n|-------|--------|\n| `2024-01-15` | \u2705 Match |\n| `1999-12-31` | \u2705 Match |\n| `2023-00-10` | \u274c Month 00 is invalid |\n| `2023-13-01` | \u274c Month 13 is invalid |\n| `2023-05-32` | \u274c Day 32 is invalid |\n| `2023-5-7` | \u274c Month and day must be two digits |\n\n## Notes\n\n- **No calendar validation.** The pattern checks only the ranges you specified. It still accepts dates like `2023-02-31` or `2023-04-31`, which don't exist.\n- **Stricter version.** If you want day limits that depend on the month, use this pattern. It still ignores leap years, so it allows Feb 29 in every year:\n  ```regex\n  ^\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|02-(?:0[1-9]|1\\d|2\\d))$\n  ```\n- **Full validation.** For complete accuracy, including leap years, use the regex to check the format. Then parse the date with your language's date library to confirm it exists.\n- **Searching in text.** If you want to find dates inside longer text rather than match a whole string, replace `^` and `$` with `\\b`.",
+      "code_score": 0,
+      "code_note": "invalid regex: multiple repeat at position 719 (line 32, column 4)",
+      "model_score": 6,
+      "model_reasoning": "The regex itself fully meets every criterion. However, the instructions explicitly say to deduct points for explanation or text outside the required format, and this answer is mostly extra material. The core answer is correct, so it loses points mainly for verbosity.",
+      "score": 3.0
+    },
+    {
+      "task": "Produce a JSON object that maps each of these messy country values to an ISO 3166-1 alpha-2 code: 'U.S.A.', 'united kingdom', 'Deutschland', 'espa\u00f1a'.",
+      "format": "json",
+      "output": "```json\n{\n  \"U.S.A.\": \"US\",\n  \"united kingdom\": \"GB\",\n  \"Deutschland\": \"DE\",\n  \"espa\u00f1a\": \"ES\"\n}\n```\n\nThe United Kingdom's ISO 3166-1 alpha-2 code is **GB**, not \"UK\". \"UK\" is only an exceptionally reserved code in ISO 3166-1, though it is used elsewhere, for example in the `.uk` domain.",
+      "code_score": 0,
+      "code_note": "invalid json: Expecting value: line 1 column 1 (char 0)",
+      "model_score": 6,
+      "model_reasoning": "The content fully meets the solution criteria. However, the required format is JSON, and the answer adds markdown fencing plus explanatory prose outside the object. The instructions say such extra text should lose points, so the score is reduced even though the mapping itself is correct.",
+      "score": 3.0
+    }
+  ]
+}

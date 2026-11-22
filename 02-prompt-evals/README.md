@@ -60,6 +60,20 @@ reading a chat, not for a program using the output.
 **v2:** adding clear output-format rules to the prompt fixed it. One change
 to the prompt, and the score tripled.
 
+| Case | v1 (code / model → score) | v2 (code / model → score) |
+|---|---|---|
+| Python `normalize_phone` | 0 / 7 → 3.5 | 10 / 9 → 9.5 |
+| Regex for YYYY-MM-DD | 0 / 6 → 3.0 | 10 / 9 → 9.5 |
+| JSON country codes | 0 / 6 → 3.0 | 10 / 10 → 10.0 |
+
+In v2 the model grader only took points off for small things: a redundant
+check in the Python function, and a regex lookbehind that not every regex
+engine supports.
+
+Full outputs and grader reasoning for each run:
+[v1 results](results/v1-20261122-195047.json) ·
+[v2 results](results/v2-20261122-195458.json)
+
 ## What I learned
 
 - **An eval is a repeatable test for a prompt.** Instead of reading a few

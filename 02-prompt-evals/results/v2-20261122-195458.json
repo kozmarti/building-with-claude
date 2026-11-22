@@ -1,0 +1,37 @@
+{
+  "prompt_version": "v2",
+  "model": "claude-opus-5-5",
+  "average_score": 9.666666666666666,
+  "results": [
+    {
+      "task": "Write a Python function normalize_phone(s) that strips everything except digits from a phone number string and returns None if fewer than 10 digits remain.",
+      "format": "python",
+      "output": "def normalize_phone(s):\n    if s is None:\n        return None\n    digits = ''.join(ch for ch in str(s) if ch.isdigit() and ch in '0123456789')\n    if len(digits) < 10:\n        return None\n    return digits",
+      "code_score": 10,
+      "code_note": "valid python",
+      "model_score": 9,
+      "model_reasoning": "The function meets every criterion: it strips non-digits, returns None below 10 digits, returns the digit string otherwise, and uses only the standard library. It contains no text outside the code. The only issues are a redundant isdigit() check and minor defensive additions, which are stylistic.",
+      "score": 9.5
+    },
+    {
+      "task": "Give a regular expression that matches dates in YYYY-MM-DD format where the month is 01-12 and the day is 01-31.",
+      "format": "regex",
+      "output": "(?<!\\d)\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])(?!\\d)",
+      "code_score": 10,
+      "code_note": "valid regex",
+      "model_score": 9,
+      "model_reasoning": "The regex meets every criterion. It requires a four-digit year, limits months to 01-12 and days to 01-31, and rejects 2024-13-01 because 13 is not a valid month. The digit lookarounds prevent matching part of a longer number. The answer follows the required format with no extra text. The only minor deduction is portability, since lookbehind is not supported in all regex engines.",
+      "score": 9.5
+    },
+    {
+      "task": "Produce a JSON object that maps each of these messy country values to an ISO 3166-1 alpha-2 code: 'U.S.A.', 'united kingdom', 'Deutschland', 'espa\u00f1a'.",
+      "format": "json",
+      "output": "{\"U.S.A.\": \"US\", \"united kingdom\": \"GB\", \"Deutschland\": \"DE\", \"espa\u00f1a\": \"ES\"}",
+      "code_score": 10,
+      "code_note": "valid json",
+      "model_score": 10,
+      "model_reasoning": "The answer is a well-formed JSON object. Each key reproduces the original string exactly, and each value is the correct code: United States is US, United Kingdom is GB (not UK), Germany is DE, and Spain is ES. There is no extraneous explanation or formatting. It fully meets the criteria.",
+      "score": 10.0
+    }
+  ]
+}
