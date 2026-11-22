@@ -10,6 +10,7 @@ course. Each folder is one module, with code I wrote while working through it.
 |---|---|---|
 | 01 | [API basics](01-api-basics/) | Requests, system prompts, a multi-turn terminal chat, and a temperature experiment |
 | 02 | [Prompt evals](02-prompt-evals/) | An end-to-end eval pipeline: generated dataset, code + model graders, scored prompt versions |
+| 03 | [Prompt engineering](03-prompt-engineering/) | An athlete meal plan prompt improved one technique at a time, each version scored by an eval |
 
 More modules (tool use) are coming as I work through the course.
 
@@ -20,6 +21,11 @@ More modules (tool use) are coming as I work through the course.
   grader (is it valid?) and a model grader (is it correct?), and reports an
   average score. Adding explicit output-format rules took the prompt from
   **3.17 to 9.67 / 10**.
+- **[Prompt engineering experiment](03-prompt-engineering/):** clear
+  instructions, specific guidelines and XML tags raised a meal plan prompt
+  from 7.25 to 9.00 / 10. Adding a short example then *dropped* it to 7.00,
+  because Claude copied the example's brevity. The README shows how the eval
+  results revealed why.
 
 - **[`chat.py`](01-api-basics/chat.py):** a terminal chat that keeps the
   conversation history itself, because the API is stateless.
@@ -59,6 +65,7 @@ Then run:
 python 01-api-basics/chat.py
 python 01-api-basics/temperature.py
 python 02-prompt-evals/run_eval.py --version v2
+python 03-prompt-engineering/run_eval.py --version v4
 ```
 
 ## Project layout
@@ -67,6 +74,7 @@ python 02-prompt-evals/run_eval.py --version v2
 common/claude.py     shared client, model choice and helpers used by every module
 01-api-basics/       module 1
 02-prompt-evals/     module 2
+03-prompt-engineering/  module 3
 ```
 
 ## Tech

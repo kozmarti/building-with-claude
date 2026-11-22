@@ -1,0 +1,42 @@
+[
+  {
+    "athlete": {
+      "sport": "marathon running",
+      "height_cm": 172,
+      "weight_kg": 61,
+      "goal": "fuel a 25 km long run this morning and recover well",
+      "dietary_restrictions": "vegetarian"
+    },
+    "extra_criteria": "No meat or fish. Carbohydrate-heavy breakfast before the run, and a recovery meal with protein and carbs soon after."
+  },
+  {
+    "athlete": {
+      "sport": "powerlifting",
+      "height_cm": 183,
+      "weight_kg": 98,
+      "goal": "gain muscle mass while keeping fat gain low",
+      "dietary_restrictions": "lactose intolerant"
+    },
+    "extra_criteria": "No regular dairy (lactose-free alternatives are fine). Calorie surplus and high protein, roughly 1.6-2.2 g per kg of body weight."
+  },
+  {
+    "athlete": {
+      "sport": "competitive swimming",
+      "height_cm": 168,
+      "weight_kg": 57,
+      "goal": "two training sessions today (6:00 and 17:00) with steady energy",
+      "dietary_restrictions": "none"
+    },
+    "extra_criteria": "Meals and snacks are timed around both sessions, including something light before the 6:00 session."
+  },
+  {
+    "athlete": {
+      "sport": "amateur cycling",
+      "height_cm": 178,
+      "weight_kg": 85,
+      "goal": "lose about 0.5 kg per week while keeping training performance",
+      "dietary_restrictions": "gluten-free (coeliac disease)"
+    },
+    "extra_criteria": "No wheat, barley, rye or regular oats. A moderate calorie deficit, not a crash diet, with enough carbs to fuel training."
+  }
+]

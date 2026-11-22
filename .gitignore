@@ -16,3 +16,5 @@ venv/
 # Eval run outputs (keep the folder, not every run)
 02-prompt-evals/results/*.json
 !02-prompt-evals/results/.gitkeep
+03-prompt-engineering/results/*.json
+!03-prompt-engineering/results/.gitkeep
