@@ -1,0 +1,17 @@
+[
+  {
+    "task": "Write a Python function normalize_phone(s) that strips everything except digits from a phone number string and returns None if fewer than 10 digits remain.",
+    "format": "python",
+    "solution_criteria": "Removes all non-digit characters; returns None when fewer than 10 digits remain; returns the digit string otherwise; uses only the standard library."
+  },
+  {
+    "task": "Give a regular expression that matches dates in YYYY-MM-DD format where the month is 01-12 and the day is 01-31.",
+    "format": "regex",
+    "solution_criteria": "Matches four-digit years; restricts months to 01-12; restricts days to 01-31; does not match partial strings like 2024-13-01."
+  },
+  {
+    "task": "Produce a JSON object that maps each of these messy country values to an ISO 3166-1 alpha-2 code: 'U.S.A.', 'united kingdom', 'Deutschland', 'españa'.",
+    "format": "json",
+    "solution_criteria": "Valid JSON object; keys are the original strings exactly; values are US, GB, DE and ES."
+  }
+]

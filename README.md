@@ -9,10 +9,17 @@ course. Each folder is one module, with code I wrote while working through it.
 | # | Module | What's inside |
 |---|---|---|
 | 01 | [API basics](01-api-basics/) | Requests, system prompts, a multi-turn terminal chat, and a temperature experiment |
+| 02 | [Prompt evals](02-prompt-evals/) | An end-to-end eval pipeline: generated dataset, code + model graders, scored prompt versions |
 
-More modules (prompt evaluation, tool use) are coming as I work through the course.
+More modules (tool use) are coming as I work through the course.
 
 ## Highlights
+
+- **[Prompt eval pipeline](02-prompt-evals/):** tests a prompt the way you'd
+  test code. It runs the prompt on a dataset, grades each output with a code
+  grader (is it valid?) and a model grader (is it correct?), and reports an
+  average score. Adding explicit output-format rules took the prompt from
+  **3.17 to 9.67 / 10**.
 
 - **[`chat.py`](01-api-basics/chat.py):** a terminal chat that keeps the
   conversation history itself, because the API is stateless.
@@ -51,6 +58,7 @@ Then run:
 ```bash
 python 01-api-basics/chat.py
 python 01-api-basics/temperature.py
+python 02-prompt-evals/run_eval.py --version v2
 ```
 
 ## Project layout
@@ -58,12 +66,13 @@ python 01-api-basics/temperature.py
 ```
 common/claude.py     shared client, model choice and helpers used by every module
 01-api-basics/       module 1
+02-prompt-evals/     module 2
 ```
 
 ## Tech
 
 Python · [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python) ·
-Claude Opus 5.5 (and Claude Haiku 4.5 for the temperature demo)
+Pydantic (structured outputs) · Claude Opus 5.5 (and Claude Haiku 4.5 for the temperature demo)
 
 ## License
 
