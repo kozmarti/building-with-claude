@@ -11,8 +11,9 @@ course. Each folder is one module, with code I wrote while working through it.
 | 01 | [API basics](01-api-basics/) | Requests, system prompts, a multi-turn terminal chat, and a temperature experiment |
 | 02 | [Prompt evals](02-prompt-evals/) | An end-to-end eval pipeline: generated dataset, code + model graders, scored prompt versions |
 | 03 | [Prompt engineering](03-prompt-engineering/) | An athlete meal plan prompt improved one technique at a time, each version scored by an eval |
+| 04 | [Tool use](04-tool-use/) | A training log assistant with my own tools, web search with citations, and a text editor locked to one folder |
 
-More modules (tool use) are coming as I work through the course.
+More modules are coming as I work through the course.
 
 ## Highlights
 
@@ -26,6 +27,10 @@ More modules (tool use) are coming as I work through the course.
   from 7.25 to 9.00 / 10. Adding a short example then *dropped* it to 7.00,
   because Claude copied the example's brevity. The README shows how the eval
   results revealed why.
+- **[Tool use loop](04-tool-use/):** a hand-written loop where Claude calls
+  four Python tools to log workouts and summarise training, plus Anthropic's
+  web search and text editor tools. Paths from the model are checked so the
+  editor can't leave its folder.
 
 - **[`chat.py`](01-api-basics/chat.py):** a terminal chat that keeps the
   conversation history itself, because the API is stateless.
@@ -46,7 +51,8 @@ cp .env.example .env   # then add your API key to .env
 ```
 
 Get an API key from the [Claude Console](https://platform.claude.com). The
-`.env` file is gitignored, so the key never gets committed.
+key can go in `.env` or `.env.local`; both are gitignored, so it never gets
+committed.
 
 Each time you open a new terminal, activate the environment again before
 running anything:
@@ -66,6 +72,9 @@ python 01-api-basics/chat.py
 python 01-api-basics/temperature.py
 python 02-prompt-evals/run_eval.py --version v2
 python 03-prompt-engineering/run_eval.py --version v4
+python 04-tool-use/assistant.py
+python 04-tool-use/web_search.py "Who won the most recent Tour de France?"
+python 04-tool-use/notes_editor.py
 ```
 
 ## Project layout
@@ -75,6 +84,7 @@ common/claude.py     shared client, model choice and helpers used by every modul
 01-api-basics/       module 1
 02-prompt-evals/     module 2
 03-prompt-engineering/  module 3
+04-tool-use/         module 4
 ```
 
 ## Tech

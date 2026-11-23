@@ -1,5 +1,6 @@
 # Secrets
 .env
+.env.local
 
 # Python
 __pycache__/
@@ -18,3 +19,7 @@ venv/
 !02-prompt-evals/results/.gitkeep
 03-prompt-engineering/results/*.json
 !03-prompt-engineering/results/.gitkeep
+
+# Personal training data written by the tool use assistant
+04-tool-use/training_log.json
+04-tool-use/notes/

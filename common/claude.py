@@ -6,13 +6,17 @@ and the refusal handling live in one place.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Optional, Type, TypeVar
 
 import anthropic
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
-load_dotenv()  # reads ANTHROPIC_API_KEY from a local .env file, if there is one
+# Read ANTHROPIC_API_KEY from .env or .env.local in the repo root, if present.
+_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(_ROOT / ".env")
+load_dotenv(_ROOT / ".env.local")
 
 MODEL = "claude-opus-5-5"
 
