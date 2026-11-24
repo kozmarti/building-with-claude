@@ -23,3 +23,7 @@ venv/
 # Personal training data written by the tool use assistant
 04-tool-use/training_log.json
 04-tool-use/notes/
+
+# RAG caches (embeddings and Claude-written contexts)
+05-rag/.embeddings_cache.json
+05-rag/.context_cache.json

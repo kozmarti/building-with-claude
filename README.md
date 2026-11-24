@@ -12,6 +12,7 @@ course. Each folder is one module, with code I wrote while working through it.
 | 02 | [Prompt evals](02-prompt-evals/) | An end-to-end eval pipeline: generated dataset, code + model graders, scored prompt versions |
 | 03 | [Prompt engineering](03-prompt-engineering/) | An athlete meal plan prompt improved one technique at a time, each version scored by an eval |
 | 04 | [Tool use](04-tool-use/) | A training log assistant with my own tools, web search with citations, and a text editor locked to one folder |
+| 05 | [RAG](05-rag/) | Question answering over a training guide: chunking, BM25, embeddings, hybrid search, reranking and contextual retrieval |
 
 More modules are coming as I work through the course.
 
@@ -31,6 +32,9 @@ More modules are coming as I work through the course.
   four Python tools to log workouts and summarise training, plus Anthropic's
   web search and text editor tools. Paths from the model are checked so the
   editor can't leave its folder.
+- **[RAG pipeline](05-rag/):** BM25 written from scratch plus Voyage AI
+  embeddings, merged with reciprocal rank fusion and reranked by Claude.
+  Claude answers only from the retrieved sections and cites them.
 
 - **[`chat.py`](01-api-basics/chat.py):** a terminal chat that keeps the
   conversation history itself, because the API is stateless.
@@ -75,7 +79,11 @@ python 03-prompt-engineering/run_eval.py --version v4
 python 04-tool-use/assistant.py
 python 04-tool-use/web_search.py "Who won the most recent Tour de France?"
 python 04-tool-use/notes_editor.py
+python 05-rag/rag.py "What is VO2-5x4?" --compare
 ```
+
+Module 05 also needs a `VOYAGE_API_KEY` for embeddings (see
+[its README](05-rag/README.md)).
 
 ## Project layout
 
@@ -85,12 +93,13 @@ common/claude.py     shared client, model choice and helpers used by every modul
 02-prompt-evals/     module 2
 03-prompt-engineering/  module 3
 04-tool-use/         module 4
+05-rag/              module 5
 ```
 
 ## Tech
 
 Python · [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python) ·
-Pydantic (structured outputs) · Claude Opus 5.5 (and Claude Haiku 4.5 for the temperature demo)
+Pydantic (structured outputs) · Voyage AI (embeddings) · Claude Opus 5.5 (and Claude Haiku 4.5 for the temperature demo)
 
 ## License
 
